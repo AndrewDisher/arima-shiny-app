@@ -1,0 +1,40 @@
+///// -------------------------------- ///
+//// ----- App Footer Container ----- ////
+/// -------------------------------- /////
+
+// --- App Footer Layout --- //
+.app-footer {
+  display: grid;
+  grid-template-areas: "message . github linkedIn website";
+  grid-template-columns: auto 1fr auto auto auto;
+  align-items: center;
+  justify-items: stretch;
+  justify-content: center;
+  height: 50px;
+  padding: 14px 20px 14px 20px;
+  gap: 16px;
+  width: 100%;
+  background-color: #ffffff;
+  border-top: 1px solid #c1c7cd;
+  position: fixed;
+  bottom: 0px;
+}
+
+// --- Generic Styling for Images in Footer --- //
+.author-img{
+  object-fit: cover;
+  width: 20px;
+  height: auto;
+}
+
+.github-link {
+  grid-area: github;
+}
+
+.linkedIn-link {
+  grid-area: linkedIn;
+}
+
+.website-link {
+  grid-area: website;
+}

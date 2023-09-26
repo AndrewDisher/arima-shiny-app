@@ -3,8 +3,7 @@
 # -------------------------------------------------------------------------
 
 box::use(
-  ggplot2[aes, ggplot, geom_line, geom_point],
-  shiny[moduleServer, NS, plotOutput, reactive, renderPlot],
+  shiny[moduleServer, NS, reactive, tags],
   shiny.semantic[semanticPage]
 )
 
@@ -13,7 +12,8 @@ box::use(
 # -------------------------------------------------------------------------
 
 box::use(
-  app/logic[arima_simulation]
+  app/logic[arima_simulation],
+  app/view[main_info_modal, app_body]
 )
 
 # -------------------------------------------------------------------------
@@ -24,7 +24,48 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   semanticPage(
-    plotOutput(outputId = ns("arima_plot"))
+    # ------------------------------
+    # ----- Application header -----
+    # ------------------------------
+    tags$div(class = "app-header",
+             tags$a(class = "header-logo",
+                    href = "https://www.umassd.edu/",
+                    target = "_blank",
+                    tags$img(class = "logo-image",
+                             src = "https://d92mrp7hetgfk.cloudfront.net/images/sites/misc/u_of_massachusetts-dartmouth-1/standard.png?1548463840")),
+             tags$div(class = "header-separator"),
+             tags$div(class = "header-title", "Practice with ARIMA Time Series Modeling"),
+             tags$div(class = "header-info", main_info_modal$init_ui(id = ns("main_info_modal")))
+             ),
+    
+    # ----------------------------
+    # ----- Application Body -----
+    # ----------------------------
+    app_body$init_ui(id = ns("app_body")),
+    
+    # Adding some white space
+    tags$div(class = "white-space"),
+    
+    # ------------------------------
+    # ----- Application footer -----
+    # ------------------------------
+    tags$footer(class = "app-footer",
+                tags$div(class = "message", "Built by Andrew Disher"),
+                tags$a(class = "github-link",
+                       href = "https://github.com/AndrewDisher",
+                       target = "_blank",
+                       tags$img(class = "author-img",
+                                src = "https://logos-download.com/wp-content/uploads/2016/09/GitHub_logo.png")),
+                tags$a(class = "linkedIn-link",
+                       href = "https://www.linkedin.com/in/andrew-disher-8b091b212/",
+                       target = "_blank",
+                       tags$img(class = "author-img",
+                                src = "https://pngimg.com/uploads/linkedIn/linkedIn_PNG16.png")),
+                tags$a(class = "website-link",
+                       href = "https://andrew-disher.netlify.app/",
+                       target = "_blank",
+                       tags$img(class = "author-img",
+                                src = "https://cdn.onlinewebfonts.com/svg/img_1489.png")))
   )
 }
 
@@ -50,14 +91,10 @@ server <- function(id) {
     # ----------------------------------------------
     # ----- Initialize Module Server Functions -----
     # ----------------------------------------------
+    main_info_modal$init_server(id = "main_info_modal")
+    app_body$init_server(id = "app_body", arima_sim_data = arima_sim)
     
-    output$arima_plot <- renderPlot({
-      ggplot(data = data.frame(time_series = arima_sim(),
-                               time = 1:length(arima_sim())),
-             aes(x = time, y = time_series)) +
-        geom_line() +
-        geom_point()
-    })
+    
     
   })
 }

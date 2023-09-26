@@ -1,0 +1,54 @@
+///// ---------------------------- ///
+//// ----- App Body Layouts ----- ////
+/// ---------------------------- /////
+
+@mixin card-shadow {
+  box-shadow: 
+    0 4px 8px 0 rgba(0, 0, 0, .2),
+    0 6px 20px 0 rgba(0, 0, 0, .2)
+}
+
+@mixin card {
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1em 1em;
+  padding: 1em;
+}
+
+// --- Generic Card Styling --- //
+.plot-card {
+  @include card;
+  @include card-shadow;
+}
+
+// --- Grid Layout for 4 Cards --- //
+.body-layout {
+  display: grid;
+  grid-template-areas: 
+    "time-series inputs"
+    "acf-pcf unit-circle";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 0 1em;
+}
+
+.time-series {
+  grid-area: time-series;
+}
+
+.inputs {
+  grid-area: inputs;
+}
+
+.acf-pcf {
+  grid-area: acf-pcf;
+}
+
+.unit-circle {
+  grid-area: unit-circle;
+}
+
+// --- White Space for Separation Between Content and Footer --- //
+.white-space {
+  height: 55px;
+}

@@ -1,0 +1,68 @@
+///// -------------------------------- ///
+//// ----- App Header Container ----- ////
+/// -------------------------------- /////
+
+// --- Header Container --- //
+.app-header {
+  display: grid;
+  grid-template-areas: "logo separator title . info";
+  grid-template-columns: auto 1px auto 1fr auto;
+  align-items: center;
+  justify-items: stretch;
+  justify-content: center;
+  height: 75px;
+  padding: 14px 20px 14px 20px;
+  gap: 16px;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 
+    0 4px 8px 0 rgba(0, 0, 0, .2);
+  position: sticky;
+  top: 0px;
+}
+
+// --- Header Logo --- //
+.header-logo {
+  grid-area: logo;
+  margin: 0 16px 0 0;
+}
+
+.logo-image {
+  object-fit: cover;
+  height: 48px;
+  width: auto;
+}
+
+// --- Header Separator --- //
+.header-separator {
+  grid-area: separator;
+  background: #c1c7cd;
+  margin: 10px 0;
+  height: calc(100% - 10px);
+}
+
+// --- Header Title --- //
+.header-title {
+  grid-area: title;
+  font-weight: 400;
+  font-size: 22px;
+}
+
+// --- Header Info Button --- //
+.header-info {
+  grid-area: info;
+  margin-right: 16px;
+}
+
+// --- Info Button Shiny Output Styling --- //
+div.header-info > button.header-help-icon {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #ffffff !important;
+  font-size: 25px !important;
+}
+
+// --- On Hover Effect for Info Button --- //
+button.header-help-icon > i.info.circle.icon:hover {
+  color: #166dfc;
+}
