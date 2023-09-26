@@ -4,7 +4,7 @@
 
 box::use(
   dplyr[`%>%`],
-  stats[arima.sim]
+  stats[arima.sim, runif]
 )
 
 # -------------------------------------------------------
@@ -15,13 +15,13 @@ box::use(
 simulate_params <- function() {
   # ----- Randomly generate values for AR, D, MA components (p, d, q) -----
   
-  # Number of Autoregressive parameters (range: 0:3)
+  # Number of Autoregressive parameters (range: 0-3)
   p <- sample(0:3, 1)
   
-  # Number of differencing parameters (range: 0:1)
+  # Number of differencing parameters (range: 0-1)
   d <- sample(0:1, 1)
   
-  # Number of Moving Average parameters (range: 0:3)
+  # Number of Moving Average parameters (range: 0-3)
   q <- sample(0:3, 1)
   
   # ----- Randomly generate coefficient values -----
@@ -33,12 +33,14 @@ simulate_params <- function() {
   ma <- runif(q, min = .1, max = .3)
   
   # Create a list of values to return
-  returnList <- list(order = c(p, d, q),
-                     model_specs = list(order = c(p, d, q),
-                                        ar = ar,
-                                        ma = ma))
+  return_list <- list(order = list(p = p, 
+                                   d = d,
+                                   q = q),
+                      model_specs = list(order = c(p, d, q),
+                                         ar = ar,
+                                         ma = ma))
   
-  return(returnList)
+  return(return_list)
 }
 
 # --------------------------------------------
