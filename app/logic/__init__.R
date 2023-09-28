@@ -2,6 +2,7 @@
 # https://go.appsilon.com/rhino-project-structure
 
 box::use(
+  ./constants,
   ./arima_simulation,
   
   ./app_body_logic,

@@ -94,7 +94,5 @@ server <- function(id) {
     main_info_modal$init_server(id = "main_info_modal")
     app_body$init_server(id = "app_body", arima_sim_data = arima_sim)
     
-    
-    
   })
 }
