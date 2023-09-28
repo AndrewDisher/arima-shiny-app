@@ -12,7 +12,7 @@ box::use(
 # -------------------------------------------------------------------------
 
 box::use(
-  app/view[ts_plot],
+  app/view[ts_plot, auto_correlation],
   app/logic[app_body_logic]
 )
 
@@ -54,7 +54,8 @@ init_ui <- function(id) {
                                    min = 0, 
                                    max = 3)),
                 # Plots for ACF and PACF
-                card(class = c("plot-card", "acf-pcf")),
+                card(class = c("plot-card", "acf-pcf"),
+                     auto_correlation$init_ui(id = ns("auto_correlation"))),
                 # Plot for Inverse Unit Root Circle
                 card(class = c("plot-card", "unit-circle")))
   )
@@ -91,6 +92,9 @@ init_server <- function(id, arima_sim_data) {
     ts_plot$init_server(id = "ts_plot", 
                         arima_sim_data = arima_sim_data,
                         model_fit = model_fit)
+    
+    auto_correlation$init_server(id = "auto_correlation",
+                                 model_fit = model_fit)
       
     }
    )

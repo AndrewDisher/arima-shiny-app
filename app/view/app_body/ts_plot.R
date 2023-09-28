@@ -3,7 +3,9 @@
 # -------------------------------------------------------------------------
 
 box::use(
-  shiny[moduleServer, NS, plotOutput, reactive, renderPlot, tagList]
+  dplyr[`%>%`],
+  shiny[moduleServer, NS, plotOutput, reactive, renderPlot, tagList],
+  shinycssloaders[withSpinner]
 )
 
 # -------------------------------------------------------------------------
@@ -22,7 +24,8 @@ box::use(
 init_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    plotOutput(outputId = ns("ts_plot"))
+    plotOutput(outputId = ns("ts_plot")) %>% 
+      withSpinner(type = 4)
   )
 }
 

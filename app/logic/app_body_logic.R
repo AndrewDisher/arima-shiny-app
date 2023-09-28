@@ -19,6 +19,7 @@ train_user_model <- function(arima_sim_data, parameter_p, parameter_d, parameter
                                parameter_q))
   
   return_list <- list(fitted_values = fitted(model_fit),
+                      residuals = model_fit$residuals,
                       model = model_fit)
   
   return(return_list)

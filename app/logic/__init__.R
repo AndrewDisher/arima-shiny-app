@@ -7,6 +7,7 @@ box::use(
   
   ./app_body_logic,
   ./app_body_modules/ts_plot_logic,
+  ./app_body_modules/auto_correlation_logic, 
   
   ./main_info_modal_logic
 )
