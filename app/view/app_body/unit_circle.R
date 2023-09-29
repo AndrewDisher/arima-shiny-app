@@ -4,7 +4,7 @@
 
 box::use(
   dplyr[`%>%`],
-  shiny[moduleServer, NS, plotOutput, renderPlot, tagList],
+  shiny[moduleServer, NS, plotOutput, reactive, renderPlot, tagList],
   shinycssloaders[withSpinner]
 )
 
@@ -13,7 +13,7 @@ box::use(
 # -------------------------------------------------------------------------
 
 box::use(
-  app/logic[ts_plot_logic]
+  app/logic[unit_circle_logic]
 )
 
 # -------------------------------------------------------------------------
@@ -24,7 +24,7 @@ box::use(
 init_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    plotOutput(outputId = ns("ts_plot")) %>% 
+    plotOutput(outputId = ns("unit_circle")) %>% 
       withSpinner(type = 4)
   )
 }
@@ -34,16 +34,24 @@ init_ui <- function(id) {
 # -------------------------------------------------------------------------
 
 #' @export
-init_server <- function(id, arima_sim_data, model_fit) {
+init_server <- function(id, model_fit) {
   moduleServer(id, function(input, output, session) {
+    
+    # -------------------------------------
+    # ----- Reactive Data Preparation -----
+    # -------------------------------------
+    
+    unit_root_data <- reactive({
+      unit_circle_logic$get_unit_roots(model = model_fit()$model)
+    })
+    
     # --------------------------
     # ----- ggplot2 Output -----
     # --------------------------
-    output$ts_plot <- renderPlot({
-      ts_plot_logic$build_time_series(sim_data = arima_sim_data(),
-                                      model_data = model_fit()$fitted_values)
+    output$unit_circle <- renderPlot({
+      unit_circle_logic$build_unit_circle(unit_root_data = unit_root_data())
     })
-    
+      
     }
    )
 }

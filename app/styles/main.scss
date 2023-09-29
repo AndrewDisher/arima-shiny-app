@@ -1,7 +1,10 @@
 @import
-  'abstracts/general-styles';
+  'abstracts/general-styles',
+  'abstracts/variables',
+  'abstracts/mixins';
 
 @import
   'layout/header',
   'layout/body',
   'layout/footer';
+  

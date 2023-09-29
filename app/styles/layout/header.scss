@@ -14,9 +14,9 @@
   padding: 14px 20px 14px 20px;
   gap: 16px;
   width: 100%;
-  background-color: #ffffff;
+  background-color: $neutral_color;
   box-shadow: 
-    0 4px 8px 0 rgba(0, 0, 0, .2);
+    0 4px 8px 0 $box_shadow_color;
   position: sticky;
   top: 0px;
   z-index: 2;
@@ -37,7 +37,7 @@
 // --- Header Separator --- //
 .header-separator {
   grid-area: separator;
-  background: #c1c7cd;
+  background: $divider_color;
   margin: 10px 0;
   height: calc(100% - 10px);
 }
@@ -59,11 +59,11 @@
 div.header-info > button.header-help-icon {
   margin: 0 !important;
   padding: 0 !important;
-  background: #ffffff !important;
+  background: $neutral_color !important;
   font-size: 25px !important;
 }
 
 // --- On Hover Effect for Info Button --- //
 button.header-help-icon > i.info.circle.icon:hover {
-  color: #166dfc;
+  color: $primary_color;
 }

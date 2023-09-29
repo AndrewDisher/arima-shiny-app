@@ -12,7 +12,7 @@ box::use(
 # -------------------------------------------------------------------------
 
 box::use(
-  app/view[ts_plot, auto_correlation],
+  app/view[ts_plot, auto_correlation, unit_circle],
   app/logic[app_body_logic]
 )
 
@@ -57,7 +57,8 @@ init_ui <- function(id) {
                 card(class = c("plot-card", "acf-pcf"),
                      auto_correlation$init_ui(id = ns("auto_correlation"))),
                 # Plot for Inverse Unit Root Circle
-                card(class = c("plot-card", "unit-circle")))
+                card(class = c("plot-card", "unit-circle"),
+                     unit_circle$init_ui(id = ns("unit_circle"))))
   )
 }
 
@@ -95,6 +96,9 @@ init_server <- function(id, arima_sim_data) {
     
     auto_correlation$init_server(id = "auto_correlation",
                                  model_fit = model_fit)
+    
+    unit_circle$init_server(id = "unit_circle",
+                            model_fit = model_fit)
       
     }
    )

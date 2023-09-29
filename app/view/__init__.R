@@ -6,5 +6,6 @@ box::use(
   
   ./app_body/app_body,
   ./app_body/ts_plot,
-  ./app_body/auto_correlation
+  ./app_body/auto_correlation,
+  ./app_body/unit_circle
 )

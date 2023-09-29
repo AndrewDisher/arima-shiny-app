@@ -51,7 +51,8 @@ simulate_params <- function() {
 simulate_arima <- function(param_list, n = 300) {
   # Simulate ARIMA process (returns a numeric time series vector)
   ts_vector <- arima.sim(n = n,
-                         param_list) %>% 
+                         param_list,
+                         sd = sqrt(1)) %>% 
     as.numeric()
   
   return(ts_vector)

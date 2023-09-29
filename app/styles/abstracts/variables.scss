@@ -1,0 +1,19 @@
+// --- Colors --- //
+$color_white: #ffffff;
+$color_ash: #c1c7cd;
+$color_blue: #166dfc;
+$color_orange: #FCA516;
+$color_black: rgba(0, 0, 0, .2);
+
+$primary_color: $color_blue;
+$secondary_color: $color_orange;
+$box_shadow_color: $color_black;
+$neutral_color: $color_white;
+$divider_color: $color_ash;
+
+// --- Breakpoints --- //
+$breakXs: 0px;
+$breakSm: 480px;
+$breakMd: 720px;
+$breakLg: 960px;
+$breakXl: 1200px;

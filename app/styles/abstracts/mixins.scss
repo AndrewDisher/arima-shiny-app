@@ -1,0 +1,23 @@
+// --- Card Component Styles --- //
+@mixin card-shadow {
+  box-shadow: 
+    0 4px 8px 0 $box_shadow_color,
+    0 6px 20px 0 $box_shadow_color
+}
+
+@mixin card {
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1em 1em;
+  padding: 1em;
+}
+
+// --- Function for Media Queries --- //
+// This function was created by Appsilon for the Enterprise dashboard (https://connect.appsilon.com/shiny-enterprise-demo/)
+@mixin mediaFrom($breakpoint) {
+  @if $breakpoint {
+    @media only screen and (min-width: $breakpoint) {
+      @content;
+    }
+  }
+}
