@@ -3,8 +3,9 @@
 # -------------------------------------------------------------------------
 
 box::use(
-  ggplot2[aes, annotate, coord_fixed, facet_wrap, geom_hline, geom_point, geom_vline, ggplot, labs, theme, 
-          theme_minimal, vars],
+  dplyr[`%>%`],
+  ggplot2[aes, annotate, coord_fixed, facet_wrap, geom_hline, geom_point, geom_vline, 
+          ggplot, labs, stat_qq, stat_qq_line, theme, theme_minimal, vars],
   ggtext[...],
   glue[glue],
   forecast[autoplot, is.Arima]
@@ -44,6 +45,9 @@ facet_labeller <- function(labels) {lapply(labels,
 #' @export
 build_unit_circle <- function(unit_root_data) {
   
+  # Colors for labels and plot
+  plot_colors <- constants$color_list
+  
   # ----- Case 1: No Model Parameters Selected ----- #
   if (nrow(unit_root_data) == 0) {
     # Generate placeholder data
@@ -54,7 +58,7 @@ build_unit_circle <- function(unit_root_data) {
                             UnitCircle = c("Within", "Within"))
     
     # Determine title of plot
-    plot_title <- glue("<span style = 'font-size:18pt;'>No AR or MA Roots</span>")
+    plot_title <- glue("<span style = 'font-size:18pt; color:{plot_colors$primary};'>No AR or MA Roots</span>")
     
     # ----- Case 2: One Model Parameter Selected ----- #
   } else if(length(unique(unit_root_data$type)) == 1) {
@@ -75,14 +79,14 @@ build_unit_circle <- function(unit_root_data) {
     }
     
     # Title of Plot
-    plot_title <- glue("<span style = 'font-size:18pt;'>Inverse Model Parameter Roots</span>")
+    plot_title <- glue("<span style = 'font-size:18pt; color:{plot_colors$primary};'>Inverse Model Parameter Roots</span>")
     
     # ----- Case 3: Two or More Model Parameters Selected ----- #
   } else {
     plot_data <- unit_root_data
     
     # Title of Plot
-    plot_title <- glue("<span style = 'font-size:18pt;'>Inverse Model Parameter Roots</span>")
+    plot_title <- glue("<span style = 'font-size:18pt; color:{plot_colors$primary};'>Inverse Model Parameter Roots</span>")
   }
   
   # Define labels for plot title, axes
@@ -113,6 +117,39 @@ build_unit_circle <- function(unit_root_data) {
   if (nrow(unit_root_data) != 0) {
     plot <- plot + geom_point(size = 3, color = constants$color_list$primary)
   }
+  
+  return(plot)
+}
+
+# --------------------------------------------
+# ----- Function to Build Normal QQ Plot -----
+# --------------------------------------------
+
+#' @export
+build_normality_plot <- function(residuals) {
+  # Data frame for plotting
+  plot_data <- data.frame(residual_data = residuals %>% 
+                            as.numeric())
+  
+  # Colors for labels and plot
+  plot_colors <- constants$color_list
+  
+  # Labels for plot
+  plot_labels <- list(x_label = "<span style = 'font-size:16pt;'>Theoretical Quantiles</span>",
+                      y_label = "<span style = 'font-size:16pt;'>Sample Quantiles</span>",
+                      title = glue("<span style = 'font-size:18pt;'><span style = 'color:{plot_colors$primary};'>Normal QQ Plot for Model Residuals</span></span>"))
+  
+  # Construct the Normal QQ Plot
+  plot <- ggplot(data = plot_data, mapping = aes(sample = residual_data)) +
+    stat_qq_line() +
+    stat_qq(color = plot_colors$primary) +
+    theme_minimal() +
+    labs(x = plot_labels$x_label,
+         y = plot_labels$y_label,
+         title = plot_labels$title) +
+    theme(plot.title = element_markdown(size = 11, lineheight = 1.2),
+          axis.title.x = element_markdown(),
+          axis.title.y = element_markdown())
   
   return(plot)
 }

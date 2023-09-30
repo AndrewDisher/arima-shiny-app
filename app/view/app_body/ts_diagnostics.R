@@ -25,8 +25,15 @@ box::use(
 init_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    plotOutput(outputId = ns("ts_plot")) %>% 
-      withSpinner(type = 4)
+    tabset(tabs = list(
+      list(menu = "Time Series", id = ns("ts_tab"),
+           content = plotOutput(outputId = ns("ts_plot")) %>% 
+             withSpinner(type = 4)),
+      list(menu = "Residual Time Series", id = ns("ts_resid_tab"),
+           content = plotOutput(outputId = ns("ts_residual_plot")) %>% 
+             withSpinner(type = 4))
+      ),
+      id = ns("time_series_tabset"))
   )
 }
 
@@ -37,12 +44,19 @@ init_ui <- function(id) {
 #' @export
 init_server <- function(id, arima_sim_data, model_fit) {
   moduleServer(id, function(input, output, session) {
-    # --------------------------
-    # ----- ggplot2 Output -----
-    # --------------------------
+    # ------------------------------
+    # ----- Time Series Output -----
+    # ------------------------------
     output$ts_plot <- renderPlot({
       ts_diagnostics_logic$build_time_series(sim_data = arima_sim_data(),
                                              model_data = model_fit()$fitted_values)
+    })
+    
+    # ---------------------------------------
+    # ----- Residual Time Series Output -----
+    # ---------------------------------------
+    output$ts_residual_plot <- renderPlot({
+      ts_diagnostics_logic$build_residual_time_series(residuals = model_fit()$residuals)
     })
     
     }

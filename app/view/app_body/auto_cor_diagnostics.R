@@ -31,7 +31,9 @@ init_ui <- function(id) {
              withSpinner(type = 4)),
       list(menu = "PACF", id = ns("pacf_tab"), 
            content = plotOutput(outputId = ns("pacf_plot")) %>% 
-             withSpinner(type = 4))
+             withSpinner(type = 4)),
+      list(menu = "Ljung P-Values", id = ns("ljung_tab"),
+           content = "")
     ),
     id = ns("auto_cor_tabset"))
   )
