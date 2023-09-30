@@ -5,6 +5,7 @@
 box::use(
   dplyr[`%>%`],
   shiny[moduleServer, NS, plotOutput, renderPlot, tagList],
+  shiny.semantic[tabset],
   shinycssloaders[withSpinner]
 )
 
@@ -13,7 +14,7 @@ box::use(
 # -------------------------------------------------------------------------
 
 box::use(
-  app/logic[ts_plot_logic]
+  app/logic[ts_diagnostics_logic]
 )
 
 # -------------------------------------------------------------------------
@@ -40,8 +41,8 @@ init_server <- function(id, arima_sim_data, model_fit) {
     # ----- ggplot2 Output -----
     # --------------------------
     output$ts_plot <- renderPlot({
-      ts_plot_logic$build_time_series(sim_data = arima_sim_data(),
-                                      model_data = model_fit()$fitted_values)
+      ts_diagnostics_logic$build_time_series(sim_data = arima_sim_data(),
+                                             model_data = model_fit()$fitted_values)
     })
     
     }

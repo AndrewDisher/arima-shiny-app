@@ -6,9 +6,9 @@ box::use(
   ./arima_simulation,
   
   ./app_body_logic,
-  ./app_body_modules/ts_plot_logic,
-  ./app_body_modules/auto_correlation_logic, 
-  ./app_body_modules/unit_circle_logic,
+  ./app_body_modules/ts_diagnostics_logic,
+  ./app_body_modules/auto_cor_diagnostics_logic, 
+  ./app_body_modules/misc_diagnostics_logic,
   
   ./main_info_modal_logic
 )

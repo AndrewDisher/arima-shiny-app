@@ -5,7 +5,7 @@ box::use(
   ./main_info_modal,
   
   ./app_body/app_body,
-  ./app_body/ts_plot,
-  ./app_body/auto_correlation,
-  ./app_body/unit_circle
+  ./app_body/ts_diagnostics,
+  ./app_body/auto_cor_diagnostics,
+  ./app_body/misc_diagnostics
 )

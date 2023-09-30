@@ -12,7 +12,7 @@ box::use(
 # -------------------------------------------------------------------------
 
 box::use(
-  app/view[ts_plot, auto_correlation, unit_circle],
+  app/view[ts_diagnostics, auto_cor_diagnostics, misc_diagnostics],
   app/logic[app_body_logic]
 )
 
@@ -35,7 +35,7 @@ init_ui <- function(id) {
     custom_grid(class = "body-layout", 
                 # Time Series Plot
                 card(class = c("plot-card", "time-series"), 
-                     ts_plot$init_ui(id = ns("ts_plot"))),
+                     ts_diagnostics$init_ui(id = ns("ts_diagnostics"))),
                 # User Model Parameter Inputs
                 card(class = c("plot-card", "inputs"),
                      numeric_input(input_id = ns("AR_input"),
@@ -55,10 +55,10 @@ init_ui <- function(id) {
                                    max = 3)),
                 # Plots for ACF and PACF
                 card(class = c("plot-card", "acf-pcf"),
-                     auto_correlation$init_ui(id = ns("auto_correlation"))),
+                     auto_cor_diagnostics$init_ui(id = ns("auto_cor_diagnostics"))),
                 # Plot for Inverse Unit Root Circle
                 card(class = c("plot-card", "unit-circle"),
-                     unit_circle$init_ui(id = ns("unit_circle"))))
+                     misc_diagnostics$init_ui(id = ns("misc_diagnostics"))))
   )
 }
 
@@ -90,15 +90,15 @@ init_server <- function(id, arima_sim_data) {
     # ----------------------------------------------
     # ----- Initialize Module Server Functions -----
     # ----------------------------------------------
-    ts_plot$init_server(id = "ts_plot", 
-                        arima_sim_data = arima_sim_data,
-                        model_fit = model_fit)
+    ts_diagnostics$init_server(id = "ts_diagnostics",
+                               arima_sim_data = arima_sim_data,
+                               model_fit = model_fit)
     
-    auto_correlation$init_server(id = "auto_correlation",
+    auto_cor_diagnostics$init_server(id = "auto_cor_diagnostics",
+                                     model_fit = model_fit)
+    
+    misc_diagnostics$init_server(id = "misc_diagnostics",
                                  model_fit = model_fit)
-    
-    unit_circle$init_server(id = "unit_circle",
-                            model_fit = model_fit)
       
     }
    )

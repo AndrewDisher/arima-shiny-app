@@ -14,7 +14,7 @@ box::use(
 # -------------------------------------------------------------------------
 
 box::use(
-  app/logic[auto_correlation_logic]
+  app/logic[auto_cor_diagnostics_logic]
 )
 
 # -------------------------------------------------------------------------
@@ -49,24 +49,24 @@ init_server <- function(id, model_fit) {
     # ----- Reactive Data Preparation -----
     # -------------------------------------
     auto_cor_df <- reactive({ 
-      auto_correlation_logic$get_auto_cor(model_residuals = model_fit()$residuals, 
-                                          max_lag = 25)
+      auto_cor_diagnostics_logic$get_auto_cor(model_residuals = model_fit()$residuals,
+                                              max_lag = 25)
     })
     
     # ------------------------------
     # ----- Build the ACF Plot -----
     # ------------------------------
     output$acf_plot <- renderPlot({
-      auto_correlation_logic$build_acf(auto_cor_df = auto_cor_df(),
-                                       n_obs = 300)
+      auto_cor_diagnostics_logic$build_acf(auto_cor_df = auto_cor_df(),
+                                           n_obs = 300)
     })
     
     # -------------------------------
     # ----- Build the PACF Plot -----
     # -------------------------------
     output$pacf_plot <- renderPlot({
-      auto_correlation_logic$build_pacf(auto_cor_df = auto_cor_df(),
-                                       n_obs = 300)
+      auto_cor_diagnostics_logic$build_pacf(auto_cor_df = auto_cor_df(),
+                                            n_obs = 300)
     })
     
     }

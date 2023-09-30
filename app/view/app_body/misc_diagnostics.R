@@ -13,7 +13,7 @@ box::use(
 # -------------------------------------------------------------------------
 
 box::use(
-  app/logic[unit_circle_logic]
+  app/logic[misc_diagnostics_logic]
 )
 
 # -------------------------------------------------------------------------
@@ -42,14 +42,14 @@ init_server <- function(id, model_fit) {
     # -------------------------------------
     
     unit_root_data <- reactive({
-      unit_circle_logic$get_unit_roots(model = model_fit()$model)
+      misc_diagnostics_logic$get_unit_roots(model = model_fit()$model)
     })
     
     # --------------------------
     # ----- ggplot2 Output -----
     # --------------------------
     output$unit_circle <- renderPlot({
-      unit_circle_logic$build_unit_circle(unit_root_data = unit_root_data())
+      misc_diagnostics_logic$build_unit_circle(unit_root_data = unit_root_data())
     })
       
     }
