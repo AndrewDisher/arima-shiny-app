@@ -95,7 +95,10 @@ init_server <- function(id, arima_sim_data) {
                                model_fit = model_fit)
     
     auto_cor_diagnostics$init_server(id = "auto_cor_diagnostics",
-                                     model_fit = model_fit)
+                                     model_fit = model_fit,
+                                     param_p = parameter_p,
+                                     param_d = parameter_d,
+                                     param_q = parameter_q)
     
     misc_diagnostics$init_server(id = "misc_diagnostics",
                                  model_fit = model_fit)

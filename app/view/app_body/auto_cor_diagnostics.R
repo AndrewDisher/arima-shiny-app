@@ -33,7 +33,8 @@ init_ui <- function(id) {
            content = plotOutput(outputId = ns("pacf_plot")) %>% 
              withSpinner(type = 4)),
       list(menu = "Ljung P-Values", id = ns("ljung_tab"),
-           content = "")
+           content = plotOutput(outputId = ns("LB_values")) %>% 
+             withSpinner(type = 4))
     ),
     id = ns("auto_cor_tabset"))
   )
@@ -44,7 +45,7 @@ init_ui <- function(id) {
 # -------------------------------------------------------------------------
 
 #' @export
-init_server <- function(id, model_fit) {
+init_server <- function(id, model_fit, param_p, param_d, param_q) {
   moduleServer(id, function(input, output, session) {
     
     # -------------------------------------
@@ -69,6 +70,14 @@ init_server <- function(id, model_fit) {
     output$pacf_plot <- renderPlot({
       auto_cor_diagnostics_logic$build_pacf(auto_cor_df = auto_cor_df(),
                                             n_obs = 300)
+    })
+    
+    # ------------------------------------------------
+    # ----- Build the Plot of Ljung-Box p-values -----
+    # ------------------------------------------------
+    output$LB_values <- renderPlot({
+      auto_cor_diagnostics_logic$build_LB_plot(model_residuals = model_fit()$residuals,
+                                               num_params = (param_p() + param_d() + param_q()))
     })
     
     }
