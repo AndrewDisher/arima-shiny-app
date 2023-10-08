@@ -8,3 +8,13 @@ body {
 body::-webkit-scrollbar {
   display: none;  /* Safari and Chrome */
 }
+
+// --- Preformatted Text Output for Model Summary --- //
+pre {
+  overflow: auto;
+}
+
+// --- Padding for Card Tabset Elements --- //
+.ui.tab.bottom.attached.grid.segment.active {
+  padding: 1em;
+}

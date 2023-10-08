@@ -1,0 +1,65 @@
+///// ---------------------------------- ///
+//// ----- Styles for Info Modal ----- ////
+/// -------------------------------- /////
+
+// ------------------------------------------- //
+// --- General Styles for Modal Components --- //
+// ------------------------------------------- //
+.modal-title {
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.modal-description-header{
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 0 0 .7em 2.50em;
+}
+
+.modal-paragraph{
+  font-size: 1em;
+  margin: 0 3em 0 3em;
+  color: $color_dark_black	;
+}
+
+// ------------------------------ //
+// --- Main Info Modal Styles --- //
+// ------------------------------ //
+
+.technology-grid{
+  margin: 0 3em 0 3em;
+  align-items: center;
+  display: grid;
+  grid-template-areas: 
+  "left-description right-tech-used";
+  column-gap: .2em;
+  grid-template-columns: 15% 85%;
+}
+
+.left-description{
+  grid-area: left-description;
+  text-align: left;
+}
+
+.right-tech-used{
+  grid-area: right-tech-used;
+  text-align: left;
+}
+
+.tech-span{
+  display: inline-block;
+  background: $color_turqoise;
+  color: $button_background_color;
+  border-radius: 1em;
+  border: 1px solid $box_shadow_color;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.tech-span:hover{
+  background: $primary_color;
+  color: $neutral_color;
+  border-color: $primary_color;
+}

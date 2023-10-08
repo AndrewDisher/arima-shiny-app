@@ -3,8 +3,11 @@
 # -------------------------------------------------------------------------
 
 box::use(
-  shiny[div, moduleServer, NS, tagList, reactive],
-  shiny.semantic[numeric_input]
+  dplyr[`%>%`],
+  forecast[is.Arima],
+  shiny[a, div, moduleServer, NS, reactive, renderPrint, span, tagList, verbatimTextOutput],
+  shiny.semantic[action_button, icon, numeric_input, tabset],
+  shinycssloaders[withSpinner]
 )
 
 # -------------------------------------------------------------------------
@@ -32,27 +35,45 @@ custom_grid <- function(class, ...) {div(class = class, ...)}
 init_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    custom_grid(class = "body-layout", 
+    custom_grid(class = "body-layout",
+                # ----------------------------------------------
+                # ----- Tabset for Model Params and Output -----
+                # ----------------------------------------------
+                card(class = c("plot-card", "inputs"),
+                     # --- User Model Parameter Inputs ---
+                     tabset(tabs = list(
+                       list(menu = "Model Parameters", id = ns("params"),
+                            content = tagList(
+                              custom_grid(class = "model-input-grid",
+                                          numeric_input(input_id = ns("AR_input"),
+                                                        label = "Auto-Regressive Parameters",
+                                                        value = 0,
+                                                        min = 0, 
+                                                        max = 3),
+                                          numeric_input(input_id = ns("D_input"),
+                                                        label = "Order of Differencing",
+                                                        value = 0,
+                                                        min = 0, 
+                                                        max = 1),
+                                          numeric_input(input_id = ns("MA_input"),
+                                                        label = "Moving Average Parameters",
+                                                        value = 0,
+                                                        min = 0, 
+                                                        max = 3))
+                              )),
+                       # --- Model Summary Output ---
+                       list(menu = "Model Output", id = ns("mod_output"),
+                            content = verbatimTextOutput(outputId = ns("model_summary")) %>% 
+                              withSpinner(type = 4)
+                            )
+                       ))
+                     ),
+                # -----------------------------
+                # ----- Plot Output Cards -----
+                # -----------------------------
                 # Time Series Plot
                 card(class = c("plot-card", "time-series"), 
                      ts_diagnostics$init_ui(id = ns("ts_diagnostics"))),
-                # User Model Parameter Inputs
-                card(class = c("plot-card", "inputs"),
-                     numeric_input(input_id = ns("AR_input"),
-                                   label = "Auto-Regressive Parameters",
-                                   value = 0,
-                                   min = 0, 
-                                   max = 3),
-                     numeric_input(input_id = ns("D_input"),
-                                   label = "Order of Differencing",
-                                   value = 0,
-                                   min = 0, 
-                                   max = 1),
-                     numeric_input(input_id = ns("MA_input"),
-                                   label = "Moving Average Parameters",
-                                   value = 0,
-                                   min = 0, 
-                                   max = 3)),
                 # Plots for ACF and PACF
                 card(class = c("plot-card", "acf-pcf"),
                      auto_cor_diagnostics$init_ui(id = ns("auto_cor_diagnostics"))),
@@ -82,9 +103,14 @@ init_server <- function(id, arima_sim_data) {
     # ----------------------------------
     model_fit <- reactive({
       app_body_logic$train_user_model(arima_sim_data = arima_sim_data(), 
-                                     parameter_p = parameter_p(),
-                                     parameter_d = parameter_d(),
-                                     parameter_q = parameter_q())
+                                      parameter_p = parameter_p(),
+                                      parameter_d = parameter_d(),
+                                      parameter_q = parameter_q())
+    })
+    
+    output$model_summary <- renderPrint({
+      model_fit()$model %>% 
+        summary()
     })
     
     # ----------------------------------------------

@@ -1,0 +1,21 @@
+///// ------------------------------------ ///
+//// ----- Styles for Model Inputs ----- ////
+/// ---------------------------------- /////
+
+.model-input-grid {
+  display: grid;
+  grid-template-areas: 
+    "info-icon1 model-input1 ."
+    "input1-description input1-description input1-description"
+    "info-icon2 model-input2 ."
+    "input2-description input2-description input2-description"
+    "info-icon3 model-input3 ."
+    "input3-description input3-description input3-description";
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+}
+
+
+
+
+

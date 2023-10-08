@@ -122,7 +122,7 @@ build_LB_plot <- function(model_residuals, num_params) {
   
   for (lag in num_params:25) {
     # Generate p-value
-    temp_p_value <- Box.test(x = model_residuals, lag = lag, fitdf = num_params)$p.value
+    temp_p_value <- Box.test(x = model_residuals, type = "Ljung-Box", lag = lag, fitdf = num_params)$p.value
     
     # Concatenate to p-value vector
     p_value <- c(p_value, temp_p_value)
@@ -155,6 +155,5 @@ build_LB_plot <- function(model_residuals, num_params) {
           axis.title.y = element_markdown())
   
   return(plot)
-  
 }
 

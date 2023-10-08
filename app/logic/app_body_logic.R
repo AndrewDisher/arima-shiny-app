@@ -4,7 +4,7 @@
 
 box::use(
   stats[arima, fitted],
-  forecast[is.Arima]
+  forecast[Arima, is.Arima]
 )
 
 # -----------------------------------------------------
@@ -13,7 +13,7 @@ box::use(
 
 #' @export
 train_user_model <- function(arima_sim_data, parameter_p, parameter_d, parameter_q) {
-  model_fit <- arima(arima_sim_data,
+  model_fit <- Arima(arima_sim_data,
                      order = c(parameter_p, 
                                parameter_d, 
                                parameter_q))

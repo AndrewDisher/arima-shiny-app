@@ -4,12 +4,15 @@ $color_ash: #c1c7cd;
 $color_blue: #166dfc;
 $color_orange: #FCA516;
 $color_black: rgba(0, 0, 0, .2);
+$color_dark_black: rgba(0, 0, 0, .6);
+$color_turqoise: #e4f1f7;
 
 $primary_color: $color_blue;
 $secondary_color: $color_orange;
 $box_shadow_color: $color_black;
 $neutral_color: $color_white;
 $divider_color: $color_ash;
+$button_background_color: $color_dark_black;
 
 // --- Breakpoints --- //
 $breakXs: 0px;

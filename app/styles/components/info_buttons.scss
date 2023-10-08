@@ -1,0 +1,16 @@
+///// -------------------------------------------- ///
+//// ----- Styles for Various Info Buttons ----- ////
+/// ------------------------------------------ /////
+
+// --- Dismiss Button for Info Modal --- //
+.ui.positive.button {
+  background-color: $color_turqoise !important;
+  border: 1px solid $box_shadow_color;
+  color: $button_background_color !important;
+}
+
+.ui.positive.button:hover {
+  background-color: $primary_color !important;
+  color: $neutral_color !important;
+  border: 1px solid $neutral_color;
+}

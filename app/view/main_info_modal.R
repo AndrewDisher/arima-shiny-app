@@ -27,7 +27,10 @@ init_ui <- function(id) {
     uiOutput(ns("modal")),
     
     # ----- Application Info Modal Button -----
-    action_button(input_id = ns("show"), label = "", icon = icon("info circle"), class = "header-help-icon")
+    action_button(input_id = ns("show"), 
+                  label = "", 
+                  icon = icon("info circle"), 
+                  class = "header-help-icon")
   )
 }
 

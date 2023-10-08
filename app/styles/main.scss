@@ -2,9 +2,13 @@
   'abstracts/general-styles',
   'abstracts/variables',
   'abstracts/mixins';
+  
+@import
+  'components/info_buttons';
 
 @import
   'layout/header',
   'layout/body',
-  'layout/footer';
+  'layout/footer',
+  'layout/info_modal';
   
