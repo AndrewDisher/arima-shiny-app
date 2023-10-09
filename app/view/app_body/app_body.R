@@ -45,21 +45,52 @@ init_ui <- function(id) {
                        list(menu = "Model Parameters", id = ns("params"),
                             content = tagList(
                               custom_grid(class = "model-input-grid",
-                                          numeric_input(input_id = ns("AR_input"),
-                                                        label = "Auto-Regressive Parameters",
-                                                        value = 0,
-                                                        min = 0, 
-                                                        max = 3),
-                                          numeric_input(input_id = ns("D_input"),
-                                                        label = "Order of Differencing",
-                                                        value = 0,
-                                                        min = 0, 
-                                                        max = 1),
-                                          numeric_input(input_id = ns("MA_input"),
-                                                        label = "Moving Average Parameters",
-                                                        value = 0,
-                                                        min = 0, 
-                                                        max = 3))
+                                          div(class = "model-input-1",
+                                              numeric_input(input_id = ns("AR_input"),
+                                                            label = "Auto-Regressive Parameters",
+                                                            value = 0,
+                                                            min = 0, 
+                                                            max = 3)),
+                                          div(class = "input-description-1",
+                                              "Auto-regressive parameters use previous values of the 
+                                              time series to help predict the next value for the series.
+                                              The Auto-regressive order of an ARIMA model is closely related
+                                              to the Partial Autocorrelation function (PACF). 
+                                              Further reading on this concept is available", 
+                                              a(target = "_blank", 
+                                                href = "https://en.wikipedia.org/wiki/Autoregressive_model", 
+                                                span("here."))
+                                              ),
+                                          div(class = "model-input-2", 
+                                              numeric_input(input_id = ns("D_input"),
+                                                            label = "Order of Differencing",
+                                                            value = 0,
+                                                            min = 0, 
+                                                            max = 1)),
+                                          div(class = "input-description-2",
+                                              "Differencing a time series entails subtracting the previous
+                                              value in the series from the current value of the series. In practice, 
+                                              it is used eliminate some types non-stationarity that can be present in 
+                                              the series. Further reading on this concept is available", 
+                                              a(target = "_blank", 
+                                                href = "https://en.wikipedia.org/wiki/Lag_operator", 
+                                                span("here."))
+                                          ),
+                                          div(class = "model-input-3",
+                                              numeric_input(input_id = ns("MA_input"),
+                                                            label = "Moving Average Parameters",
+                                                            value = 0,
+                                                            min = 0, 
+                                                            max = 3)),
+                                          div(class = "input-description-3",
+                                              "Moving Average parameters use the shocks, or error terms, of a previous 
+                                              value in the series to help predict the next value of the series. The MA order of
+                                              an ARIMA model is closely related to the Autocorrelation function (ACF).
+                                              Further reading on this concept is available", 
+                                              a(target = "_blank", 
+                                                href = "https://en.wikipedia.org/wiki/Moving-average_model", 
+                                                span("here."))
+                                          ))
                               )),
                        # --- Model Summary Output ---
                        list(menu = "Model Output", id = ns("mod_output"),

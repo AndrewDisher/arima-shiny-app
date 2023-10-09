@@ -2,20 +2,59 @@
 //// ----- Styles for Model Inputs ----- ////
 /// ---------------------------------- /////
 
+// --- Mixins for Grid Element Styling --- //
+
+@mixin description-text {
+  margin-left: 25px;
+}
+
+@mixin input-div {
+  font-weight: bold;
+}
+
+// --- Input Grid --- //
 .model-input-grid {
   display: grid;
   grid-template-areas: 
-    "model-input1 ."
-    "input1-description input1-description"
-    "model-input2 ."
-    "input2-description input2-description"
-    "model-input3 ."
-    "input3-description input3-description";
-  grid-template-columns: auto 1fr;
+    "model-input-1"
+    "input-description-1"
+    "model-input-2"
+    "input-description-2"
+    "model-input-3"
+    "input-description-3";
+  grid-template-columns: auto;
   align-items: center;
+  row-gap: 7px;
 }
 
+// --- Grid Elements --- //
 
+.model-input-1 {
+  @include input-div;
+  grid-area: model-input-1;
+}
 
+.model-input-2 {
+  @include input-div;
+  grid-area: model-input-2;
+}
 
+.model-input-3 {
+  @include input-div;
+  grid-area: model-input-3;
+}
 
+.input-description-1 {
+  @include description-text;
+  grid-area: input-description-1;
+}
+
+.input-description-2 {
+  @include description-text;
+  grid-area: input-description-2;
+}
+
+.input-description-3 {
+  @include description-text;
+  grid-area: input-description-3;
+}
