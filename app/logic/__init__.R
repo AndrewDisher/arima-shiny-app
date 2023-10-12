@@ -10,5 +10,6 @@ box::use(
   ./app_body_modules/auto_cor_diagnostics_logic, 
   ./app_body_modules/misc_diagnostics_logic,
   
-  ./main_info_modal_logic
+  ./main_info_modal_logic,
+  ./answer_button_modal_logic
 )

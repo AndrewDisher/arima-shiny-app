@@ -13,7 +13,7 @@ box::use(
 
 box::use(
   app/logic[arima_simulation],
-  app/view[main_info_modal, app_body]
+  app/view[main_info_modal, app_body, answer_button_modal]
 )
 
 # -------------------------------------------------------------------------
@@ -51,6 +51,7 @@ ui <- function(id) {
     # ------------------------------
     tags$footer(class = "app-footer",
                 tags$div(class = "message", "Built by Andrew Disher"),
+                tags$div(class = "footer-answer-button", answer_button_modal$init_ui(id = ns("answer_button_modal"))),
                 tags$a(class = "github-link",
                        href = "https://github.com/AndrewDisher",
                        target = "_blank",
@@ -93,10 +94,6 @@ server <- function(id) {
     # ----------------------------------------------
     main_info_modal$init_server(id = "main_info_modal")
     app_body$init_server(id = "app_body", arima_sim_data = arima_sim)
-    
-    # -----------------------------------------
-    # ----- Modal for Check Answer Button -----
-    # -----------------------------------------
-    
+    answer_button_modal$init_server(id = "answer_button_modal", params = simulation_order)
   })
 }

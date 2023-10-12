@@ -5,13 +5,13 @@
 // --- App Footer Layout --- //
 .app-footer {
   display: grid;
-  grid-template-areas: "message . github linkedIn website";
-  grid-template-columns: auto 1fr auto auto auto;
+  grid-template-areas: "message . answer . github linkedIn website";
+  grid-template-columns: auto 1fr auto 1fr auto auto auto;
   align-items: center;
   justify-items: stretch;
   justify-content: center;
   height: 50px;
-  padding: 14px 20px 14px 20px;
+  padding: 7px 20px 7px 20px;
   gap: 16px;
   width: 100%;
   background-color: $neutral_color;
@@ -37,4 +37,9 @@
 
 .website-link {
   grid-area: website;
+}
+
+// --- Show Answer Info Button --- //
+.footer-answer-button {
+  grid-area: answer;
 }

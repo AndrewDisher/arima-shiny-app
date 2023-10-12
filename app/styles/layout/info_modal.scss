@@ -22,6 +22,15 @@
   color: $color_dark_black	;
 }
 
+.author-description {
+  border-radius: 1em;
+  border: 1px solid $box_shadow_color;
+  background: $color_turqoise;
+  margin: 0 3em 0 3em;
+  padding: .5em 1em;
+  align-items: center;
+}
+
 // ------------------------------ //
 // --- Main Info Modal Styles --- //
 // ------------------------------ //
@@ -62,4 +71,18 @@
   background: $primary_color;
   color: $neutral_color;
   border-color: $primary_color;
+}
+
+///// ------------------------------------ ///
+//// ----- Styles for Answer Modal ----- ////
+/// ---------------------------------- /////
+
+.answer-container {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.answer-note {
+  
 }

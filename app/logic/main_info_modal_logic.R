@@ -15,6 +15,10 @@ box::use(
 #   
 # )
 
+# --------------------------------------------
+# ----- Function to Build the Info Modal -----
+# --------------------------------------------
+
 #' @export
 build_modal <- function(modal_id) {
   modal(
@@ -98,7 +102,13 @@ build_modal <- function(modal_id) {
       # ----------------------------
       # ----- About the Author -----
       # ----------------------------
-      h4(class = "modal-description-header", "About the Author")
+      h4(class = "modal-description-header", "About the Author"),
+      div(class = "author-description",
+          "My name is Andrew Disher and I am a Data Science Master's student at the
+          University of Massachusetts Dartmouth. Among other things, I delight in building 
+          R Shiny applications that showcase the collective power of R, Shiny, HTML, CSS, and
+          a suite of other readily available web technologies, all to better communicate data. You can reach me
+          via LinkedIn, and browse some of my other work available on GitHub and my website. Cheers!")
     )
   )
 }
