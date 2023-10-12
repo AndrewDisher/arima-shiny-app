@@ -35,7 +35,17 @@ build_modal <- function(modal_id) {
       # ---------------------------------
       h4(class = "modal-description-header", "About the Project"),
       
-      p(class = "modal-paragraph", "This is some text"),
+      p(class = "modal-paragraph", 
+        "This application is meant to be used as a tool to practice modeling non-seasonal 
+        ARIMA time series. The main goal is to help acquaint people with the modeling
+        process by providing the necessary diagnostic charts and model output to compare
+        potential models."),
+      br(),
+      p(class = "modal-paragraph",
+        "On application start up, a random ARIMA data generating process is used to generate
+        a time series of 300 values. No two time series are identical when you reload this 
+        application, making it a useful tool to hone your data modeling skills on a variety of
+        time series data!"),
       br(),
       
       # ------------------------------------------
