@@ -157,10 +157,6 @@ init_server <- function(id, arima_sim_data) {
     })
     
     output$model_summary <- renderPrint({
-      # Validate that the specified model (given numeric model specifications are valid)
-      # is stationary. This is a vague validation condition, so we'll check that 
-      # other user errors aren't the reason.
-      
       model_fit()$model %>% 
         summary()
     })
