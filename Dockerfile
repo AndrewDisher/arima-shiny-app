@@ -5,6 +5,7 @@ FROM rocker/shiny:4.3.0
 ## install debian packages
 RUN apt-get update -qq \
   && apt-get -y --no-install-recommends install \
+    libxml2-dev \
   && rm -rf /var/lib/apt/lists/*
     
 # Remove shiny-server example apps
