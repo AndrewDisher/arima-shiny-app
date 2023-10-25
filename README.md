@@ -47,3 +47,5 @@ add and remove model parameters that specify the order of an ARIMA model.
 Once the user is content with their work and the final model they have specified, they can check the answer to validate their proposed model. 
 
 Happy modeling!
+
+![ARIMA-gif](https://github.com/AndrewDisher/arima-shiny-app/assets/67594486/93d63b5c-32a4-4466-ad83-fd4907e5bc36)
